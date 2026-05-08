@@ -10,7 +10,8 @@ async function getData(location){
         + format(Date.now() + oneWeekInSeconds, "yyyy-M-d")
         + "?key=HX6ZYM4HCT33AWBA8V2HENJ28"; 
         const response = await fetch(url);
-        console.log(response);
+        const data = await response.json();
+        console.log(data);
     }catch(error){
         console.log(error);
     }
