@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Verdana", "Helvetica", "Arial", sans-serif;
   background-color: rgb(224, 224, 255);;
 }
 
@@ -31,7 +31,6 @@ form{
 
 #searchButton{
   font-size: 2em;
-  font-weight: bold;
   padding: 0.25em;
   border-radius: 0.25em;
   border: none;
@@ -40,10 +39,12 @@ form{
 
 #searchButton:hover{
   background-color: rgb(0, 150, 0);
+  font-weight: bold;
 }
 
 #searchButton:active{
   background-color: rgb(0, 220, 0);
+  font-weight: bold;
 }
 
 #errorText{

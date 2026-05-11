@@ -47,10 +47,11 @@ let previousRequest = "";
 
 searchButton.addEventListener("click", async () => {
     event.preventDefault();
-    if(locationField.value != previousRequest){
-        submitRequest(locationField.value)
+    const userInput = locationField.value;
+    if(userInput != previousRequest && userInput.trim().length != 0){
+        submitRequest(userInput);
     }
-    previousRequest = locationField.value;
+    previousRequest = userInput;
 });
 
 async function submitRequest(value){
