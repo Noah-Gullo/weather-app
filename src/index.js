@@ -1,3 +1,4 @@
+import { te } from "date-fns/locale";
 import "./styles.css";
 import {format} from "date-fns"
 
@@ -69,6 +70,9 @@ function displayData(data){
     
     const location = document.getElementById("location");
     location.textContent = weatherData.location;
+
+    const temperature = document.getElementById("temperature");
+    temperature.textContent = weatherData.temperature;
 
     const precipitation = document.getElementById("precipitation");
     const humidity = document.getElementById("humidity");

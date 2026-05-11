@@ -12,7 +12,6 @@ h1{
   margin: 0.5em;
   font-size: 3.5rem;
   font-weight: bolder;
-  color: rgb(0, 0, 117);
 }
 
 form{
@@ -58,10 +57,35 @@ form{
   border: 0.3em black solid;
 }
 
+#info{
+  display: flex;
+  justify-content: space-around;
+}
+
+#temperatureInfo{
+  display: flex;
+}
+
+#temperatureInfo > button{
+  font-size: 4.5rem;
+  font-weight: bold;
+  border: none;
+}
+
+#temperature,
+#temperatureInfo p{
+  font-size: 5rem;
+}
+
 #miscInfo{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   padding: 0.5em;
+}
+
+#left > p,
+#right > p{
+  color: rgb(98, 98, 98);
 }
 
 #left > p{
@@ -72,10 +96,11 @@ form{
   margin: 0.3em;
 }
 
-#dataDisplay h2{
+#location{
   display: flex;
   justify-self: center;
   font-size: 2.5rem;
+  color: rgb(46, 46, 46);
 }
 
 #errorText{
