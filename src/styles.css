@@ -47,6 +47,37 @@ form{
   font-weight: bold;
 }
 
+#dataDisplay[visible="false"]{
+  content-visibility: hidden;
+  border: none;
+}
+
+#dataDisplay{
+  margin: 1em;
+  border-radius: 0.5em;
+  border: 0.3em black solid;
+}
+
+#miscInfo{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0.5em;
+}
+
+#left > p{
+  margin: 0.5em;
+}
+
+#right > p{
+  margin: 0.3em;
+}
+
+#dataDisplay h2{
+  display: flex;
+  justify-self: center;
+  font-size: 2.5rem;
+}
+
 #errorText{
   content-visibility: hidden;
 }

@@ -1,6 +1,14 @@
 import "./styles.css";
 import {format} from "date-fns"
 
+const form = document.querySelector("form");
+const locationField = document.getElementById("locationField");
+const searchButton = document.getElementById("searchButton");
+const dataDisplay = document.getElementById("dataDisplay");
+dataDisplay.setAttribute("visible", "false");
+let weatherData = {};
+let previousRequest = ""; 
+
 async function getData(location){
     try{
         const errorText = document.getElementById("errorText");
@@ -13,6 +21,7 @@ async function getData(location){
         if(response.status === 400){
             errorText.setAttribute("visible", "true");
             errorText.textContent = "Location not found. Please try again.";
+            dataDisplay.setAttribute("visible", "false");
             throw new Error(`Response status: ${response.status}`);
         }
 
@@ -30,7 +39,7 @@ function processData(data){
         "icon": data.currentConditions.icon,
         "precipitation": "Precipitation: " + data.currentConditions.precip + "%",
         "humidity": "Humidity: " + data.currentConditions.humidity + "%",
-        "wind": "Wind Speed: " + data.currentConditions.windspeed + "mph",
+        "windspeed": "Wind Speed: " + data.currentConditions.windspeed + "mph",
         "condition": "Condition: " + data.currentConditions.conditions,
         "date": new Date(Date.now()),
         "description": "Description: " + data.description,
@@ -38,12 +47,6 @@ function processData(data){
 
     return filtered;
 }
-
-const form = document.querySelector("form");
-const locationField = document.getElementById("locationField");
-const searchButton = document.getElementById("searchButton");
-let weatherData = {};
-let previousRequest = ""; 
 
 searchButton.addEventListener("click", async () => {
     event.preventDefault();
@@ -57,8 +60,29 @@ searchButton.addEventListener("click", async () => {
 async function submitRequest(value){
     weatherData = await getData(value);
     if(weatherData != null){
-        for (const [key, value] of Object.entries(weatherData)) {
-            console.log(`${value}`);
-        }
+        displayData(weatherData);
     }
 }
+
+function displayData(data){
+    dataDisplay.setAttribute("visible", "true");
+    
+    const location = document.getElementById("location");
+    location.textContent = weatherData.location;
+
+    const precipitation = document.getElementById("precipitation");
+    const humidity = document.getElementById("humidity");
+    const wind = document.getElementById("wind");
+
+    precipitation.textContent = weatherData.precipitation;
+    humidity.textContent = weatherData.humidity;
+    wind.textContent = weatherData.windspeed;
+
+    const condition = document.getElementById("condition");
+    const date = document.getElementById("date");
+    const description = document.getElementById("description");
+
+    condition.textContent = weatherData.condition;
+    date.textContent = weatherData.date;
+    description.textContent = weatherData.description;
+}   
