@@ -18,19 +18,22 @@ async function getData(location){
 function processData(data){
     console.log(data);
     const filtered = {
-        "temp": data.currentConditions.temp,
-        "tempmax": data.days[0].tempmax,
-        "tempmin": data.days[0].tempmin,
+        "location": data.address.toUpperCase(),
+        "temperature": data.currentConditions.temp,
         "icon": data.currentConditions.icon,
-        "description": data.description,
+        "precipitation": "Precipitation: " + data.currentConditions.precip + "%",
+        "humidity": "Humidity: " + data.currentConditions.humidity + "%",
+        "wind": "Wind Speed: " + data.currentConditions.windspeed + "mph",
+        "condition": "Condition: " + data.currentConditions.conditions,
+        "date": new Date(Date.now()),
+        "description": "Description: " + data.description,
     };
+
     return filtered;
 }
 
-let weatherData = await getData("morocco");
-console.log(weatherData);
-console.log("Temperature: " + weatherData.temp);
-console.log("Max Temperature: " + weatherData.tempmax);
-console.log("Minimum Temperature: " + weatherData.tempmin);
-console.log("Icon: " + weatherData.icon);
-console.log("Description: " + weatherData.description);
+let weatherData = await getData("san luis obispo");
+
+for (const [key, value] of Object.entries(weatherData)) {
+  console.log(`${value}`);
+}
