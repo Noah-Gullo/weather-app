@@ -45,3 +45,17 @@ form{
 #searchButton:active{
   background-color: rgb(0, 220, 0);
 }
+
+#errorText{
+  content-visibility: hidden;
+}
+
+#errorText[visible="true"]{
+  content-visibility: visible;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  font-size: 3rem;
+  margin: 0.5em;
+  font-weight: bold;
+}

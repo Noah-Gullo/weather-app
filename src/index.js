@@ -3,11 +3,19 @@ import {format} from "date-fns"
 
 async function getData(location){
     try{
+        const errorText = document.getElementById("errorText");
+        errorText.setAttribute("visible", "false");
         const oneWeekInSeconds = 31536000;
         const url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" 
         + location + "/" 
         + "?key=" + "46NG7ZU8PRUUL8JJ8Q7KB5NB3"; 
         const response = await fetch(url);
+        if(response.status === 400){
+            errorText.setAttribute("visible", "true");
+            errorText.textContent = "Location not found. Please try again.";
+            throw new Error(`Response status: ${response.status}`);
+        }
+
         const data = await response.json();
         return processData(data);
     }catch(error){
@@ -16,7 +24,6 @@ async function getData(location){
 }
 
 function processData(data){
-    console.log(data);
     const filtered = {
         "location": data.address.toUpperCase(),
         "temperature": data.currentConditions.temp,
@@ -48,7 +55,9 @@ searchButton.addEventListener("click", async () => {
 
 async function submitRequest(value){
     weatherData = await getData(value);
-    for (const [key, value] of Object.entries(weatherData)) {
-        console.log(`${value}`);
+    if(weatherData != null){
+        for (const [key, value] of Object.entries(weatherData)) {
+            console.log(`${value}`);
+        }
     }
 }
