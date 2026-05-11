@@ -5,6 +5,8 @@ import {format} from "date-fns"
 const form = document.querySelector("form");
 const locationField = document.getElementById("locationField");
 const searchButton = document.getElementById("searchButton");
+const fahrenheitButton = document.getElementById("fahrenheit");
+const celsiusButton = document.getElementById("celsius");
 const dataDisplay = document.getElementById("dataDisplay");
 dataDisplay.setAttribute("visible", "false");
 let weatherData = {};
@@ -23,6 +25,7 @@ async function getData(location){
             errorText.setAttribute("visible", "true");
             errorText.textContent = "Location not found. Please try again.";
             dataDisplay.setAttribute("visible", "false");
+            weatherData = {};
             throw new Error(`Response status: ${response.status}`);
         }
 
@@ -46,6 +49,10 @@ function processData(data){
         "description": "Description: " + data.description,
     };
 
+    if(data.currentConditions.precip === null){
+        filtered.precipitation = "Precipitation: " + 0 + "%";
+    }
+
     return filtered;
 }
 
@@ -56,6 +63,20 @@ searchButton.addEventListener("click", async () => {
         submitRequest(userInput);
     }
     previousRequest = userInput;
+});
+
+fahrenheitButton.addEventListener("click", () => {
+    if(weatherData != {}){
+        const temperature = document.getElementById("temperature");
+        temperature.textContent = weatherData.temperature.toFixed(2);
+    }
+});
+
+celsiusButton.addEventListener("click", () => {
+    if(weatherData != {}){
+        const temperature = document.getElementById("temperature");
+        temperature.textContent = ((weatherData.temperature - 32) * 5/9).toFixed(2);
+    }
 });
 
 async function submitRequest(value){
