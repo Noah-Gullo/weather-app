@@ -4,3 +4,41 @@
   padding: 0px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1{
+  display: flex;
+  justify-content: center;
+  margin: 0.5em;
+  font-size: 3rem;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+#locationField{
+  font-size: 2em;
+  background-color: rgb(224, 224, 255);
+  border: none;
+  padding: 0.25em;
+  border-radius: 0.25em;
+}
+
+#searchButton{
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  border: none;
+  background-color: rgb(0, 190, 0);
+}
+
+#searchButton:hover{
+  background-color: rgb(0, 150, 0);
+}
+
+#searchButton:active{
+  background-color: rgb(0, 220, 0);
+}

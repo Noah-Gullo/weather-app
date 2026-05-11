@@ -32,8 +32,23 @@ function processData(data){
     return filtered;
 }
 
-let weatherData = await getData("san luis obispo");
+const form = document.querySelector("form");
+const locationField = document.getElementById("locationField");
+const searchButton = document.getElementById("searchButton");
+let weatherData = {};
+let previousRequest = ""; 
 
-for (const [key, value] of Object.entries(weatherData)) {
-  console.log(`${value}`);
+searchButton.addEventListener("click", async () => {
+    event.preventDefault();
+    if(locationField.value != previousRequest){
+        submitRequest(locationField.value)
+    }
+    previousRequest = locationField.value;
+});
+
+async function submitRequest(value){
+    weatherData = await getData(value);
+    for (const [key, value] of Object.entries(weatherData)) {
+        console.log(`${value}`);
+    }
 }
