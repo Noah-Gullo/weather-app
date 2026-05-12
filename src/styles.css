@@ -3,7 +3,7 @@
   margin: 0px;
   padding: 0px;
   font-family: "Verdana", "Helvetica", "Arial", sans-serif;
-  background-color: rgb(224, 224, 255);;
+  background-color: rgb(224, 224, 255);
 }
 
 h1{
@@ -66,9 +66,14 @@ form{
   display: flex;
 }
 
+#temperatureInfo > p{  
+  color: rgb(167, 167, 193);
+}
+
 #temperatureInfo > button{
   font-size: 4.5rem;
   font-weight: bold;
+  color: rgb(167, 167, 193);
   border: none;
 }
 

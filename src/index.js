@@ -1,4 +1,3 @@
-import { te } from "date-fns/locale";
 import "./styles.css";
 import {format} from "date-fns"
 
@@ -49,6 +48,8 @@ function processData(data){
         "description": "Description: " + data.description,
     };
 
+    filtered.temperature = filtered.temperature.toFixed(0);
+
     if(data.currentConditions.precip === null){
         filtered.precipitation = "Precipitation: " + 0 + "%";
     }
@@ -68,14 +69,14 @@ searchButton.addEventListener("click", async () => {
 fahrenheitButton.addEventListener("click", () => {
     if(weatherData != {}){
         const temperature = document.getElementById("temperature");
-        temperature.textContent = weatherData.temperature.toFixed(2);
+        temperature.textContent = weatherData.temperature;
     }
 });
 
 celsiusButton.addEventListener("click", () => {
     if(weatherData != {}){
         const temperature = document.getElementById("temperature");
-        temperature.textContent = ((weatherData.temperature - 32) * 5/9).toFixed(2);
+        temperature.textContent = ((weatherData.temperature - 32) * 5/9).toFixed(0);
     }
 });
 
@@ -86,7 +87,7 @@ async function submitRequest(value){
     }
 }
 
-function displayData(data){
+async function displayData(data){
     dataDisplay.setAttribute("visible", "true");
     
     const location = document.getElementById("location");
@@ -94,6 +95,15 @@ function displayData(data){
 
     const temperature = document.getElementById("temperature");
     temperature.textContent = weatherData.temperature;
+
+    const icon = document.getElementById("icon");
+    const iconPNG = import(`./icons/${weatherData.icon}.png`).then((result) => {
+        console.log(result);
+        const path = result.default;
+        icon.setAttribute("width", "100px");
+        icon.setAttribute("height", "auto");
+        icon.src = path;
+    });
 
     const precipitation = document.getElementById("precipitation");
     const humidity = document.getElementById("humidity");
